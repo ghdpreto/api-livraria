@@ -14,25 +14,22 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "livro")
-@AllArgsConstructor(access = AccessLevel.MODULE)
-@NoArgsConstructor(access = AccessLevel.MODULE)
+@Table(name = "cliente")
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Builder(toBuilder = true)
-public class Livro extends Auditoria {
+public class Cliente extends Auditoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "ds_titulo", nullable = false)
-    private String titulo;
+    @Column(name = "ds_nome", nullable = false)
+    private String nome;
 
-    @Column(name = "ds_author", nullable = false)
-    private String autor;
+    @Column(name = "ds_email", nullable = false)
+    private String email;
 
-    @Column(name = "vl_preco", nullable = false)
-    private Double preco;
-
-    @Column(name = "qt_estoque")
-    private Integer quantidadeEstoque;
+    @Column(name = "ds_endereco", nullable = false)
+    private String endereco;
 }
