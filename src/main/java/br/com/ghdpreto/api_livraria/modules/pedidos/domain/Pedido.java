@@ -1,16 +1,17 @@
-package br.com.ghdpreto.api_livraria.modules.cliente.domain.model;
+package br.com.ghdpreto.api_livraria.modules.pedidos.domain;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 import java.util.UUID;
 
-import br.com.ghdpreto.api_livraria.modules.pedidos.domain.Pedido;
+import br.com.ghdpreto.api_livraria.modules.cliente.domain.model.Cliente;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -22,25 +23,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "pedidos")
 @AllArgsConstructor(access = AccessLevel.MODULE)
 @NoArgsConstructor(access = AccessLevel.MODULE)
 @Builder(toBuilder = true)
 @Getter
-public class Cliente {
-
+public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
-    @Column(name = "ds_nome", nullable = false)
-    private String nome;
-
-    @Column(name = "ds_endereco")
-    private String endereco;
-
-    @Column(name = "ds_email", nullable = false, unique = true)
-    private String email;
 
     @Column(name = "dt_criacao", nullable = false, updatable = false)
     @Setter(AccessLevel.NONE)
@@ -49,8 +40,9 @@ public class Cliente {
     @Column(name = "dt_atualizacao", nullable = false)
     private LocalDateTime dataAtualizacao;
 
-    @OneToMany(mappedBy = "cliente")
-    private Set<Pedido> pedidos;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
 
     @PrePersist
     protected void aoCriar() {
@@ -62,5 +54,4 @@ public class Cliente {
     protected void aoAtualizar() {
         dataAtualizacao = LocalDateTime.now();
     }
-
 }
