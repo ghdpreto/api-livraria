@@ -5,6 +5,7 @@ import br.com.ghdpreto.api_livraria.modules.cliente.domain.repository.IClienteRe
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +23,21 @@ public class ClienteRepositoryImpl implements IClienteRepository {
     @Override
     public Optional<Cliente> buscarPorEmail(String email) {
         return repository.findByEmail(email);
+    }
+
+    @Override
+    public Cliente atualizar(Cliente cliente) {
+        return repository.save(cliente);
+    }
+
+    @Override
+    public Optional<Cliente> buscarPorId(UUID id) {
+        return repository.findById(id);
+    }
+
+    @Override
+    public void deletar(UUID id) {
+        repository.deleteById(id);
     }
 
 }
