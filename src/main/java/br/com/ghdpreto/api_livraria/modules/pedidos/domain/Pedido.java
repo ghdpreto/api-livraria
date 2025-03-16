@@ -1,9 +1,11 @@
 package br.com.ghdpreto.api_livraria.modules.pedidos.domain;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 import br.com.ghdpreto.api_livraria.modules.cliente.domain.model.Cliente;
+import br.com.ghdpreto.api_livraria.modules.livro.domain.model.Livro;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +13,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -43,6 +47,13 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
+
+    @ManyToMany
+    @JoinTable(name = "pedido_livro", // NOME DA TABELA DE RELACIONAMENTO
+            joinColumns = @JoinColumn(name = "id_pedido"), // ID DA CLASSE PEDIDO
+            inverseJoinColumns = @JoinColumn(name = "id_livro") // ID DA CLASSE LIVRO
+    )
+    private Set<Livro> livros;
 
     @PrePersist
     protected void aoCriar() {

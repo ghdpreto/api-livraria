@@ -1,13 +1,17 @@
 package br.com.ghdpreto.api_livraria.modules.livro.domain.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
+import br.com.ghdpreto.api_livraria.modules.pedidos.domain.Pedido;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -46,6 +50,9 @@ public class Livro {
 
     @Column(name = "dt_atualizacao")
     private LocalDateTime dataAtualizacao;
+
+    @ManyToMany(mappedBy = "livros") // RELACIONAMENTO INVERSO
+    private Set<Pedido> pedidos = new HashSet<Pedido>();
 
     @PrePersist
     protected void onCreate() {
