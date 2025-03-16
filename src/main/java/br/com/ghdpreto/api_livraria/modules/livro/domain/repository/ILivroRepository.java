@@ -13,4 +13,6 @@ public interface ILivroRepository {
     PaginaDTO<Livro> listar(PaginacaoDTO paginacao);
 
     Optional<Livro> buscarPorId(UUID id);
+
+    Livro atualizar(Livro livro);
 }

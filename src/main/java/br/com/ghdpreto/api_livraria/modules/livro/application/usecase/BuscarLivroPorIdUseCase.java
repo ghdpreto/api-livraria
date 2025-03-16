@@ -14,6 +14,7 @@ public class BuscarLivroPorIdUseCase {
     private final ILivroRepository repository;
 
     public Livro execute(UUID id) {
+        System.out.println(id.toString());
         return repository.buscarPorId(id)
                 .orElseThrow(() -> new RuntimeException("Livro com o ID [" + "] não encontrado."));
 

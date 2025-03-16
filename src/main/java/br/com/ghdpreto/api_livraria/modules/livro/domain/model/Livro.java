@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.com.ghdpreto.api_livraria.modules.pedidos.domain.Pedido;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,6 +54,7 @@ public class Livro {
     private LocalDateTime dataAtualizacao;
 
     @ManyToMany(mappedBy = "livros") // RELACIONAMENTO INVERSO
+    @JsonBackReference
     private Set<Pedido> pedidos = new HashSet<Pedido>();
 
     @PrePersist

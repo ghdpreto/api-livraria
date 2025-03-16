@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.com.ghdpreto.api_livraria.modules.pedidos.domain.Pedido;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,6 +52,7 @@ public class Cliente {
     private LocalDateTime dataAtualizacao;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonBackReference
     private Set<Pedido> pedidos;
 
     @PrePersist

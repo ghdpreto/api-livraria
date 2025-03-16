@@ -42,4 +42,9 @@ public class LivroRepositoryImpl implements ILivroRepository {
         return this.repository.findById(id);
     }
 
+    @Override
+    public Livro atualizar(Livro livro) {
+        return repository.save(livro);
+    }
+
 }
