@@ -1,38 +1,25 @@
 package br.com.ghdpreto.api_livraria.domain.entities;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Entity
-@Table(name = "livro")
-@AllArgsConstructor(access = AccessLevel.MODULE)
-@NoArgsConstructor(access = AccessLevel.MODULE)
+@Getter
 @Builder(toBuilder = true)
-public class Livro extends Auditoria {
+public class Livro {
+    private final UUID id;
+    private final String titulo;
+    private final String autor;
+    private final Double preco;
+    private final Integer quantidadeEstoque;
+    private final LocalDateTime dataCriacao;
+    private final LocalDateTime dataAtualizacao;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    public static class LivroBuilder {
+        private LocalDateTime dataCriacao = LocalDateTime.now();
+        private LocalDateTime dataAtualizacao = LocalDateTime.now();
+    }
 
-    @Column(name = "ds_titulo", nullable = false)
-    private String titulo;
-
-    @Column(name = "ds_author", nullable = false)
-    private String autor;
-
-    @Column(name = "vl_preco", nullable = false)
-    private Double preco;
-
-    @Column(name = "qt_estoque")
-    private Integer quantidadeEstoque;
 }

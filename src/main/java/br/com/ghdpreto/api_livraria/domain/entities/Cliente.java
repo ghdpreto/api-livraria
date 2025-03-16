@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Builder(toBuilder = true)
-public class Cliente extends Auditoria {
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

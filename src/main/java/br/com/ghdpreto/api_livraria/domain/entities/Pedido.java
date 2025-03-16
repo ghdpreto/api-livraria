@@ -1,8 +1,7 @@
 package br.com.ghdpreto.api_livraria.domain.entities;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
+
 import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
@@ -27,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Builder
-public class Pedido extends Auditoria {
+public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -37,9 +36,13 @@ public class Pedido extends Auditoria {
     @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "pedido_livro", joinColumns = @JoinColumn(name = "id_pedido"), inverseJoinColumns = @JoinColumn(name = "id_livro"))
-    private Set<Livro> livros;
+    /*
+     * @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+     * 
+     * @JoinTable(name = "pedido_livro", joinColumns = @JoinColumn(name =
+     * "id_pedido"), inverseJoinColumns = @JoinColumn(name = "id_livro"))
+     * private Set<Livro> livros;
+     */
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dt_pedido", nullable = false)
